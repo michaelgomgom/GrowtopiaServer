@@ -472,7 +472,7 @@ struct PlayerInfo {
 	bool haveSuperSupporterName = false; // 16777216
 	bool haveSupperPineapple = false; // 33554432
 	//bool 
-	int skinColor = 0x8295C3FF; //normal SKin color like gt!
+	int skinColor = 0x8295C3FF; //normal Skin Like!
 
 	PlayerInventory inventory;
 
@@ -513,7 +513,7 @@ struct WorldInfo {
 	int height = 60;
 	string name = "TEST";
 	WorldItem* items;
-	string owner = "";
+	string owner = "Jersey Dafo";
 	bool isPublic=false;
 };
 
@@ -540,7 +540,7 @@ WorldInfo generateWorld(string name, int width, int height)
 		if (i == 3650)
 			world.items[i].foreground = 6;
 		else if (i >= 3600 && i<3700)
-			world.items[i].foreground = 0; //fixed the grass in the world!
+			world.items[i].foreground = 0; //fixed The Grass!
 		if (i == 3750)
 			world.items[i].foreground = 8;
 	}
@@ -622,7 +622,7 @@ int PlayerDB::playerLogin(ENetPeer* peer, string username, string password) {
 				if (((PlayerInfo*)(currentPeer->data))->rawName == PlayerDB::getProperName(username))
 				{
 					{
-						GamePacket p = packetEnd(appendString(appendString(createPacket(), "OnConsoleMessage"), "Someone else logged into this account!"));
+						GamePacket p = packetEnd(appendString(appendString(createPacket(), "OnConsoleMessage"), "Someone else logged into this account! You Growtopia Server Dont Original"));
 						ENetPacket * packet = enet_packet_create(p.data,
 							p.len,
 							ENET_PACKET_FLAG_RELIABLE);
@@ -630,7 +630,7 @@ int PlayerDB::playerLogin(ENetPeer* peer, string username, string password) {
 						delete p.data;
 					}
 					{
-						GamePacket p = packetEnd(appendString(appendString(createPacket(), "OnConsoleMessage"), "Someone else was logged into this account! He was kicked out now."));
+						GamePacket p = packetEnd(appendString(appendString(createPacket(), "OnConsoleMessage"), "Someone else was logged into this account! He was kicked out "));
 						ENetPacket * packet = enet_packet_create(p.data,
 							p.len,
 							ENET_PACKET_FLAG_RELIABLE);
@@ -721,10 +721,10 @@ AWorld WorldDB::get2(string name) {
 	}
 	AWorld ret;
 	name = getStrUpper(name);
-	if (name.length() < 1) throw 1; // too short name
+	if (name.length() < 1) throw 1; // Short Name!
 	for (char c : name) {
 		if ((c<'A' || c>'Z') && (c<'0' || c>'9'))
-			throw 2; // wrong name
+			throw 2; // wrong name!Error Name
 	}
 	if (name == "EXIT") {
 		throw 3;
@@ -830,10 +830,10 @@ void WorldDB::saveAll()
 vector<WorldInfo> WorldDB::getRandomWorlds() {
 	vector<WorldInfo> ret;
 	for (int i = 0; i < ((worlds.size() < 10) ? worlds.size() : 10); i++)
-	{ // load first four worlds, it is excepted that they are special
+	{ // load first four worlds, it is excepted that they are special!!
 		ret.push_back(worlds.at(i));
 	}
-	// and lets get up to 6 random
+	// letsgo To 6 random
 	if (worlds.size() > 4) {
 		for (int j = 0; j < 6; j++)
 		{
@@ -882,9 +882,9 @@ void WorldDB::saveRedundant()
 //vector<WorldInfo> worlds;
 WorldDB worldDB;
 
-void saveAllWorlds() // atexit hack plz fix
+void saveAllWorlds() // Pls Fix Hack!
 {
-	cout << "Saving worlds..." << endl;
+	cout << "Saving worlds...Pls Wait" << endl;
 	worldDB.saveAll();
 	cout << "Worlds saved!" << endl;
 }
@@ -948,7 +948,7 @@ struct ItemDefinition {
 	int growTime;
 	ClothTypes clothType;
 	BlockTypes blockType;
-	string description = "This item has no description.";
+	string description = "Item No description";
 };
 
 vector<ItemDefinition> itemDefs;
@@ -989,7 +989,7 @@ void craftItemDescriptions() {
 			{
 				itemDefs.at(atoi(ex[0].c_str())).description = ex[1];
 				if (!(atoi(ex[0].c_str()) % 2))
-					itemDefs.at(atoi(ex[0].c_str()) + 1).description = "This is a tree.";
+					itemDefs.at(atoi(ex[0].c_str()) + 1).description = "Is Three.";
 			}
 		}
 	}
@@ -1414,7 +1414,7 @@ void SendPacketRaw(int a1, void *packetData, size_t packetDataSize, void *a4, EN
 				continue;
 			if (isHere(peer, currentPeer))
 			{
-				GamePacket p2 = packetEnd(appendIntx(appendString(appendIntx(appendString(createPacket(), "OnTalkBubble"), ((PlayerInfo*)(peer->data))->netID), "`w[" + ((PlayerInfo*)(peer->data))->displayName + " `wspun the wheel and got `6"+std::to_string(val)+"`w!]"), 0));
+				GamePacket p2 = packetEnd(appendIntx(appendString(appendIntx(appendString(createPacket(), "OnTalkBubble"), ((PlayerInfo*)(peer->data))->netID), "`w[" + ((PlayerInfo*)(peer->data))->displayName + " `spin the wheel and got `0"+std::to_string(val)+"`w!]"), 0));
 				ENetPacket * packet2 = enet_packet_create(p2.data,
 					p2.len,
 					ENET_PACKET_FLAG_RELIABLE);
@@ -1476,9 +1476,9 @@ void SendPacketRaw(int a1, void *packetData, size_t packetDataSize, void *a4, EN
 			return;
 		}
 		if (world->name != "ADMIN") {
-			if (world->owner != "") {
+			if (world->owner != "Jersey Dafo") {
 				if (((PlayerInfo*)(peer->data))->rawName == world->owner) {
-					// WE ARE GOOD TO GO
+					// WE ARE GOOD!
 					if (tile == 32) {
 						GamePacket p = packetEnd(appendString(appendString(createPacket(), "OnDialogRequest"), "set_default_color|`o\n\nadd_label_with_icon|big|`wShould this world be publicly breakable?``|left|242|\n\nadd_spacer|small|\nadd_button_with_icon|worldPublic|Public|noflags|2408||\nadd_button_with_icon|worldPrivate|Private|noflags|202||\nadd_spacer|small|\nadd_quick_exit|\nadd_button|chc0|Close|noflags|0|0|\nnend_dialog|gazette||OK|"));
 						ENetPacket * packet = enet_packet_create(p.data,
@@ -1532,7 +1532,7 @@ void SendPacketRaw(int a1, void *packetData, size_t packetDataSize, void *a4, EN
 			def.breakHits = 4;
 			def.blockType = BlockTypes::UNKNOWN;
 #ifdef TOTAL_LOG
-			cout << "Ugh, unsupported item " << tile << endl;
+			cout << "huft,Dont Support Item! " << tile << endl;
 #endif
 		}
 
@@ -1564,7 +1564,7 @@ void SendPacketRaw(int a1, void *packetData, size_t packetDataSize, void *a4, EN
 					{
 						if (world->items[x + (y*world->width)].foreground == 242)
 						{
-							world->owner = "";
+							world->owner = "Jersey Dafo";
 							world->isPublic = false;
 						}
 						world->items[x + (y*world->width)].foreground = 0;
@@ -1755,7 +1755,7 @@ void SendPacketRaw(int a1, void *packetData, size_t packetDataSize, void *a4, EN
 	void sendWorld(ENetPeer* peer, WorldInfo* worldInfo)
 	{
 #ifdef TOTAL_LOG
-		cout << "Entering a world..." << endl;
+		cout << "Entering a world... Pls Wait.." << endl;
 #endif
 		((PlayerInfo*)(peer->data))->joinClothesUpdated = false;
 		string asdf = "0400000004A7379237BB2509E8E0EC04F8720B050000000000000000FBBB0000010000007D920100FDFDFDFD04000000040000000000000000000000070000000000"; // 0400000004A7379237BB2509E8E0EC04F8720B050000000000000000FBBB0000010000007D920100FDFDFDFD04000000040000000000000000000000080000000000000000000000000000000000000000000000000000000000000048133A0500000000BEBB0000070000000000
@@ -2006,17 +2006,17 @@ label|Download Latest Version
 	*/
 int _tmain(int argc, _TCHAR* argv[])
 {
-	cout << "Growtopia private server (c) Growtopia Noobs" << endl;
+	cout << "Created By Dafo Hax And Hidup Of Legend" << endl;
 	enet_initialize();
 	if (atexit(saveAllWorlds)) {
-		cout << "Worlds won't be saved for this session..." << endl;
+		cout << "World Dont Be Saved This Sessions..." << endl;
 	}
 	/*if (RegisterApplicationRestart(L" -restarted", 0) == S_OK)
 	{
-		cout << "Autorestart is ready" << endl;
+		cout << "Auto Restarted System Is Ready" << endl;
 	}
 	else {
-		cout << "Binding autorestart failed!" << endl;
+		cout << "Binding Auto Restart System Is Failed!" << endl;
 	}
 	Sleep(65000);
 	int* p = NULL;
@@ -2044,11 +2044,11 @@ int _tmain(int argc, _TCHAR* argv[])
 
 		if (file.read((char*)(itemsDat + 60), itemsDatSize))
 		{
-			cout << "Updating item data success!" << endl;
+			cout << "Updating item Data Successfully!" << endl;
 
 		}
 		else {
-			cout << "Updating item data failed!" << endl;
+			cout << "Updating item data Is Failed!" << endl;
 		}
 	}
 	
@@ -2080,9 +2080,9 @@ int _tmain(int argc, _TCHAR* argv[])
 	server->checksum = enet_crc32;
 	enet_host_compress_with_range_coder(server);
 
-	cout << "Building items database..." << endl;
+	cout << "Building items database...Pls Wait.." << endl;
 	buildItemsDatabase();
-	cout << "Database is built!" << endl;
+	cout << "Database is built Success..." << endl;
 
 	ENetEvent event;
 	/* Wait up to 1000 milliseconds for an event. */
@@ -2114,7 +2114,7 @@ int _tmain(int argc, _TCHAR* argv[])
 			event.peer->data = new PlayerInfo;
 			if (count > 3)
 			{
-				GamePacket p = packetEnd(appendString(appendString(createPacket(), "OnConsoleMessage"), "`rToo many accounts are logged on from this IP. Log off one account before playing please.``"));
+				GamePacket p = packetEnd(appendString(appendString(createPacket(), "OnConsoleMessage"), "Too many accounts are logged on from this IP. Log off one account before play"));
 				ENetPacket * packet = enet_packet_create(p.data,
 					p.len,
 					ENET_PACKET_FLAG_RELIABLE);
@@ -2261,7 +2261,7 @@ int _tmain(int argc, _TCHAR* argv[])
 				{
 #ifndef REGISTRATION
 					{
-						GamePacket p = packetEnd(appendString(appendString(createPacket(), "OnConsoleMessage"), "Registration is not supported yet!"));
+						GamePacket p = packetEnd(appendString(appendString(createPacket(), "OnConsoleMessage"), "Registration is Dont Support!"));
 						ENetPacket * packet = enet_packet_create(p.data,
 							p.len,
 							ENET_PACKET_FLAG_RELIABLE);
@@ -2330,7 +2330,7 @@ int _tmain(int argc, _TCHAR* argv[])
 						vector<string> infoDat = explode("|", to);
 						if (infoDat.size() == 2) {
 							if (infoDat[0] == "buttonClicked") btn = infoDat[1];
-							if (infoDat[0] == "dialog_name" && infoDat[1] == "register")
+							if (infoDat[0] == "dialog_name" && infoDat[1] == "register!")
 							{
 								isRegisterDialog = true;
 							}
@@ -2367,7 +2367,7 @@ int _tmain(int argc, _TCHAR* argv[])
 							enet_peer_disconnect_later(peer, 0);
 						}
 						else if(regState==-1) {
-							GamePacket p = packetEnd(appendString(appendString(createPacket(), "OnConsoleMessage"), "`rAccount creation has failed, because it already exists!``"));
+							GamePacket p = packetEnd(appendString(appendString(createPacket(), "OnConsoleMessage"), "`4Account creation has failed, because it already exists!``"));
 							ENetPacket * packet = enet_packet_create(p.data,
 								p.len,
 								ENET_PACKET_FLAG_RELIABLE);
@@ -2890,7 +2890,7 @@ int _tmain(int argc, _TCHAR* argv[])
 #ifdef REGISTRATION
 						int logStatus = PlayerDB::playerLogin(peer, ((PlayerInfo*)(event.peer->data))->rawName, ((PlayerInfo*)(event.peer->data))->tankIDPass);
 						if (logStatus == 1) {
-							GamePacket p = packetEnd(appendString(appendString(createPacket(), "OnConsoleMessage"), "`rYou have successfully logged into your account!``"));
+							GamePacket p = packetEnd(appendString(appendString(createPacket(), "OnConsoleMessage"), "`rYou have successfully logged into your account!Dont Original Growtopia!``"));
 							ENetPacket * packet = enet_packet_create(p.data,
 								p.len,
 								ENET_PACKET_FLAG_RELIABLE);
@@ -3417,7 +3417,7 @@ int _tmain(int argc, _TCHAR* argv[])
 			event.peer->data = NULL;
 		}
 	}
-	cout << "Program ended??? Huh?" << endl;
+	cout << "Program ended?Hufttt!" << endl;
 	while (1);
 	return 0;
 }
